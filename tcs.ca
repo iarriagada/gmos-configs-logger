@@ -1,0 +1,4 @@
+status tcs::tcshealth TCS Health monitor
+{
+    heartBeat tcs:heartbeat 0 TCS heartbeat monitor
+}

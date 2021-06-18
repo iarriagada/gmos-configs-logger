@@ -1,0 +1,694 @@
+#+
+# seqexec.ca
+#
+# Channel access configuration file for the sequence executor application.
+#
+# Copyright CCLRC
+#-
+
+# Define the TCS apply record.
+
+   apply tcsApply tcs:apply tcs:applyC Primary TCS Apply Record
+
+# Define sa of the same name for TCS Principal System
+   status tcsApply
+    {
+    mess       tcs:applyC.OMSS       0    Command completion message
+    }
+
+# Pointing origin offset commands.
+   command offsetPoA1 tcsApply Offset pointing origin A1
+   {
+      x tcs:offsetPoA1.A 0 X
+      y tcs:offsetPoA1.B 0 Y
+   }
+
+   command offsetPoB1 tcsApply Offset pointing origin B1
+   {
+      x tcs:offsetPoB1.A 0 X
+      y tcs:offsetPoB1.B 0 Y
+   }
+
+   command offsetPoC1 tcsApply Offset pointing origin C1
+   {
+      x tcs:offsetPoC1.A 0 X
+      y tcs:offsetPoC1.B 0 Y
+   }
+
+# Nod and Chopping commands.
+   command m2Beam tcsApply Select M2 beam
+   {
+      beam           tcs:nod.A         0 M2 Beam
+   }
+   command chopConfig tcsApply Set Chop Config
+   {
+#     mode       tcs:chopConfig.A     0 Chop Mode
+#     syncsrc    tcs:chopConfig.B     0 Chop Sync Source
+      freq       tcs:chopConfig.C     0 Chop Frequency
+      dutycycle  tcs:chopConfig.D     0 Chop Duty Cycle
+   }
+   command chopRelative tcsApply Set Chop Relative
+   {
+      throw      tcs:chopRelative.A   0 Chop Throw
+      angle      tcs:chopRelative.B   0 Chop PA
+#     frame      tcs:chopRelative.C   0 Chop Frame
+#     equinox    tcs:chopRelative.D   0 Chop Equinox
+   }
+   command chop tcsApply Chopping
+   {
+      onoff     tcs:chop.A           0 Chop On Off
+      decs      tcs:chop.B           0 DECS On Off
+   }
+
+# Guiding start/stop commands.
+
+   command m2Guide tcsApply M2 Guiding
+   {
+      state      tcs:m2GuideControl.A State
+   }
+
+   command m2GuideConfig tcsApply M2 Guiding Config
+   {
+      source    tcs:m2GuideConfig.A Source
+      beam      tcs:m2GuideConfig.F Beam
+      reset     tcs:m2GuideConfig.G Reset
+   }
+
+   command m2GuideMode tcsApply M2 Guiding Mode
+   {
+      coma      tcs:m2GuideMode.B Apply Coma Correction
+   }
+   
+   command m1Guide tcsApply M1 Guiding
+   {
+      state      tcs:m1GuideMode.A State
+   }
+
+   command mountGuide tcsApply Define mount guiding
+   {
+      mode       tcs:mountGuideMode.A Mode
+      source     tcs:mountGuideMode.B Guide Source
+      p1weight   tcs:mountGuideMode.C P1 weight
+      p2weight   tcs:mountGuideMode.D P2 weight
+   }
+
+
+# Probe follow commands.
+   command p1Follow tcsApply PWFS1 probe following
+   {
+      followState tcs:pwfs1Follow.A State
+   }
+
+   command p2Follow tcsApply PWFS2 probe following
+   {
+      followState tcs:pwfs2Follow.A State
+   }
+
+   command oiFollow tcsApply OIWFS probe following
+   {
+      followState tcs:oiwfsFollow.A State
+   }
+
+   command pwfs1Park tcsApply Park P1
+   {
+      dummy      tcs:pwfs1Park.A
+   }
+
+   command pwfs2Park tcsApply Park P2
+   {
+      dummy      tcs:pwfs2Park.A
+   }
+
+   command oiwfsPark tcsApply Park OIWFS
+   {
+      dummy      tcs:oiwfsPark.A
+   }
+
+   command pwfs1Guide tcsApply P1 guide configuration
+   {
+      nodachopa tcs:configPwfs1.A Nod A Chop A
+      nodachopb tcs:configPwfs1.B Nod A Chop B
+      nodachopc tcs:configPwfs1.C Nod A Chop C
+      nodbchopa tcs:configPwfs1.D Nod B Chop A
+      nodbchopb tcs:configPwfs1.E Nod B Chop B
+      nodbchopc tcs:configPwfs1.F Nod B Chop C
+      nodcchopa tcs:configPwfs1.G Nod C Chop A
+      nodcchopb tcs:configPwfs1.H Nod C Chop B
+      nodcchopc tcs:configPwfs1.I Nod C Chop C
+   }
+
+   command pwfs2Guide tcsApply P2 guide configuration
+   {
+      nodachopa tcs:configPwfs2.A Nod A Chop A
+      nodachopb tcs:configPwfs2.B Nod A Chop B
+      nodachopc tcs:configPwfs2.C Nod A Chop C
+      nodbchopa tcs:configPwfs2.D Nod B Chop A
+      nodbchopb tcs:configPwfs2.E Nod B Chop B
+      nodbchopc tcs:configPwfs2.F Nod B Chop C
+      nodcchopa tcs:configPwfs2.G Nod C Chop A
+      nodcchopb tcs:configPwfs2.H Nod C Chop B
+      nodcchopc tcs:configPwfs2.I Nod C Chop C
+   }
+
+   command oiwfsGuide tcsApply OIWFS guide configuration
+   {
+      nodachopa tcs:configOiwfs.A Nod A Chop A
+      nodachopb tcs:configOiwfs.B Nod A Chop B
+      nodachopc tcs:configOiwfs.C Nod A Chop C
+      nodbchopa tcs:configOiwfs.D Nod B Chop A
+      nodbchopb tcs:configOiwfs.E Nod B Chop B
+      nodbchopc tcs:configOiwfs.F Nod B Chop C
+      nodcchopa tcs:configOiwfs.G Nod C Chop A
+      nodcchopb tcs:configOiwfs.H Nod C Chop B
+      nodcchopc tcs:configOiwfs.I Nod C Chop C
+   }
+
+   command pwfs1Observe tcsApply Start P1
+   {
+      noexp      tcs:pwfs1Observe.A      Exposures
+      int        tcs:pwfs1Observe.B      interval
+      outopt     tcs:pwfs1Observe.C      Output options
+      label      tcs:pwfs1Observe.D      DHS label
+      output     tcs:pwfs1Observe.E      DHS output
+      path       tcs:pwfs1Observe.F      Path
+      name       tcs:pwfs1Observe.G      Filename
+   }
+
+   command pwfs1StopObserve tcsApply Stop P1
+   {
+      dummy      tcs:pwfs1StopObserve.A
+   }
+
+   command pwfs2Observe tcsApply Start P2
+   {
+      noexp      tcs:pwfs2Observe.A      Exposures
+      int        tcs:pwfs2Observe.B      interval
+      outopt     tcs:pwfs2Observe.C      Output options
+      label      tcs:pwfs2Observe.D      DHS label
+      output     tcs:pwfs2Observe.E      DHS output
+      path       tcs:pwfs2Observe.F      Path
+      name       tcs:pwfs2Observe.G      Filename
+   }
+
+   command pwfs2StopObserve tcsApply Stop P2
+   {
+      dummy      tcs:pwfs2StopObserve.A
+   }
+
+   command oiwfsObserve tcsApply Start OIWFS
+   {
+      noexp      tcs:oiwfsObserve.A      Exposures
+      int        tcs:oiwfsObserve.B      interval
+      outopt     tcs:oiwfsObserve.C      Output options
+      label      tcs:oiwfsObserve.D      DHS label
+      output     tcs:oiwfsObserve.E      DHS output
+      path       tcs:oiwfsObserve.F      Path
+      name       tcs:oiwfsObserve.G      Filename
+   }
+
+   command oiwfsStopObserve tcsApply Stop OIWFS
+   {
+      dummy      tcs:oiwfsStopObserve.A
+   }
+
+   command scienceFold tcsApply Position science fold
+   {
+      scfold     tcs:scienceFold.A Position
+   }
+
+   command scienceFoldPark tcsApply Park science fold
+   {
+      dummy tcs:scienceFoldPark.A
+   }
+
+   command hrwfs tcsApply Position acqcam pickoff
+   {
+      hrwfsPos tcs:hrwfs.A Position
+   }
+
+   command hrwfsPark tcsApply Park acqcam pickoff
+   {
+      dummy tcs:hrwfsPark.A
+   }
+
+# Target filter control.
+
+command filter1 tcsApply Target filter
+{
+   bandwidth    tcs:filter1.A Bandwidth
+   maxv         tcs:filter1.B Maximum velocity
+   grab         tcs:filter1.C Grab radius
+   shortCircuit tcs:filter1.D shortCircuit
+}
+
+# TCS commands for GeMS
+command g1Guide tcsApply G1 guide configuration
+{
+   nodachopa tcs:configG1.A Nod A Chop A
+   nodachopb tcs:configG1.B Nod A Chop B
+   nodachopc tcs:configG1.C Nod A Chop C
+   nodbchopa tcs:configG1.D Nod B Chop A
+   nodbchopb tcs:configG1.E Nod B Chop B
+   nodbchopc tcs:configG1.F Nod B Chop C
+   nodcchopa tcs:configG1.G Nod C Chop A
+   nodcchopb tcs:configG1.H Nod C Chop B
+   nodcchopc tcs:configG1.I Nod C Chop C
+}
+
+command g2Guide tcsApply G2 guide configuration
+{
+   nodachopa tcs:configG2.A Nod A Chop A
+   nodachopb tcs:configG2.B Nod A Chop B
+   nodachopc tcs:configG2.C Nod A Chop C
+   nodbchopa tcs:configG2.D Nod B Chop A
+   nodbchopb tcs:configG2.E Nod B Chop B
+   nodbchopc tcs:configG2.F Nod B Chop C
+   nodcchopa tcs:configG2.G Nod C Chop A
+   nodcchopb tcs:configG2.H Nod C Chop B
+   nodcchopc tcs:configG2.I Nod C Chop C
+}
+
+command g3Guide tcsApply G3 guide configuration
+{
+   nodachopa tcs:configG3.A Nod A Chop A
+   nodachopb tcs:configG3.B Nod A Chop B
+   nodachopc tcs:configG3.C Nod A Chop C
+   nodbchopa tcs:configG3.D Nod B Chop A
+   nodbchopb tcs:configG3.E Nod B Chop B
+   nodbchopc tcs:configG3.F Nod B Chop C
+   nodcchopa tcs:configG3.G Nod C Chop A
+   nodcchopb tcs:configG3.H Nod C Chop B
+   nodcchopc tcs:configG3.I Nod C Chop C
+}
+
+command g4Guide tcsApply G4 guide configuration
+{
+   nodachopa tcs:configG4.A Nod A Chop A
+   nodachopb tcs:configG4.B Nod A Chop B
+   nodachopc tcs:configG4.C Nod A Chop C
+   nodbchopa tcs:configG4.D Nod B Chop A
+   nodbchopb tcs:configG4.E Nod B Chop B
+   nodbchopc tcs:configG4.F Nod B Chop C
+   nodcchopa tcs:configG4.G Nod C Chop A
+   nodcchopb tcs:configG4.H Nod C Chop B
+   nodcchopc tcs:configG4.I Nod C Chop C
+}
+
+command ngsPr1Park   tcsApply Canopus probe 1 park
+{
+   command tcs:ngsPr1Park.DIR   Park command
+}
+
+command ngsPr2Park   tcsApply Canopus probe 2 park
+{
+   command tcs:ngsPr2Park.DIR   Park command
+}
+
+command ngsPr3Park   tcsApply Canopus probe 3 park
+{
+   command tcs:ngsPr3Park.DIR   Park command
+}
+
+command ngsPr1Follow tcsApply Canopus Guide Star 1 following
+{
+   followState tcs:ngs1Follow.A State
+}
+
+command ngsPr2Follow tcsApply Canopus Guide Star 2 following
+{
+   followState tcs:ngs2Follow.A State
+}
+
+command ngsPr3Follow tcsApply Canopus Guide Star 3 following
+{
+   followState tcs:ngs3Follow.A State
+}
+
+command odgw1Park   tcsApply ODGW 1 park
+{
+   command tcs:odgw1Park.A  Park command
+}
+
+command odgw2Park   tcsApply ODGW 2 park
+{
+   command tcs:odgw2Park.A  Park command
+}
+
+command odgw3Park   tcsApply ODGW 3 park
+{
+   command tcs:odgw3Park.A  Park command
+}
+
+command odgw4Park   tcsApply ODGW 4 park
+{
+   command tcs:odgw4Park.A  Park command
+}
+
+command odgw1Follow tcsApply ODGW 1 following
+{
+   followState tcs:odgw1Follow.A State
+}
+
+command odgw2Follow tcsApply ODGW 2 following
+{
+   followState tcs:odgw2Follow.A State
+}
+
+command odgw3Follow tcsApply ODGW 3 following
+{
+   followState tcs:odgw3Follow.A State
+}
+
+command odgw4Follow tcsApply ODGW 4 following
+{
+   followState tcs:odgw4Follow.A State
+}
+
+# TCS commands for ALTAIR
+
+   command aoFollow tcsApply GAOS probe following
+   {
+      followState tcs:aoFollow.A State
+   }
+
+   command aoCorrect tcsApply ALTAIR Image correction
+   {
+      correct    tcs:aoCorrect.A Correction On/OFF
+      matrix     tcs:aoCorrect.B Matrix ID
+      gains      tcs:aoCorrect.C Re-use gains
+   }
+
+   command aoPrepareCm tcsApply Prepare ALTAIR control matrix
+   {
+      x         tcs:aoPrepareCm.A Guide star x position
+      y         tcs:aoPrepareCm.B Guide star y position
+      seeing    tcs:aoPrepareCm.C Seeing estimate
+      gsmag     tcs:aoPrepareCm.D Guide star magnitude
+      windspeed tcs:aoPrepareCm.E Windspeed
+   }
+
+   command aoFlatten tcsApply Flatten AO light path
+   {
+      dummy     tcs:aoFlatten.A 
+   }
+
+   command aoOiwfsSource tcsApply ALTAIR OIWFS source
+   {
+       state     tcs:aoOiwfsSource.A State
+       bandwidth tcs:aoOiwfsSource.B State
+   }
+
+   command aoStats tcsApply ALTAIR statistics
+   {
+      filename    tcs:aoStats.A     DHS file name
+      samples     tcs:aoStats.B     Samples
+      interval    tcs:aoStats.C     Interval
+      trigtime    tcs:aoStats.D     Trigger time
+   }
+
+   apply aolgsApply ao:wfcs:strap ao:wfcs:strapGtCtl.BUSY Strap controller
+   command aoStrap aolgsApply ALTAIR strap
+   {
+      gate ao:wfcs:strapGtCtl.A Gate control
+      dir ao:wfcs:strapGtCtl.DIR Gate control
+   }
+   status aolgs
+    {
+      strapgate       ao:strapDevStatus.VALH       0 STRAP gate level
+      straploop       ao:wfcs:strapCorrCtl.VALA    0 STRAP loop
+      sfoloop         ao:cc:lgszoomSfoLoop         0 Sfo loop
+	   strapRTStat	    ao:strapDevStatus.VALO     	0	STRAP RT Ctl Status (1:OK, 0:not OK)
+	   strapTPStat	    ao:strapDevStatus.VALL     	0	STRAP Temp Ctl Status (1:OK, 0:not OK)
+	   strapHVStat     ao:strapDevStatus.VALI     	0	STRAP HVolt Status (1:OK, 0:not OK)
+   }
+   command aoSfoLoop aolgsApply ALTAIR sfo
+   {
+      onoff ao:cc:lgszoomSfoLoop Sfo loop control
+   }
+   command strapCorrCtl aolgsApply ALTAIR sfo
+   {
+      onoff ao:wfcs:strapCorrCtl.A Strap onoff loop control
+      dir ao:wfcs:strapCorrCtl.DIR Strap dir loop control
+   }
+
+   apply btoFsaApply bto:apply bto:FSALoopCtrlC FSA controller
+   command btoFsaLoopCtrl btoFsaApply Bto Loop control
+   {
+      loop bto:FSALoopCtrl.A Loop control loop
+      dir  bto:apply.DIR     Loop control dir
+   }
+
+# TCS sequence commands for observe / endObserve
+   command tcs::observe tcsApply Observe
+   {
+      dummy     tcs:observe.A
+   }
+   command tcs::endObserve tcsApply End Observe
+   {
+      dummy     tcs:endObserve.A
+   }
+
+# TCS sequence commands for pause / continue
+   command tcs::pause tcsApply Pause
+   {
+      dummy     tcs:pause.A
+   }
+   command tcs::continue tcsApply Continue
+   {
+      dummy     tcs:continue.A
+   }
+
+# Source Wavelength
+command wavelSourceA tcsApply Source A wavelength
+{
+   wavel tcs:wavelSourceA.A Wavelength (mu)
+}
+command wavelSourceB tcsApply Source B wavelength
+{
+   wavel tcs:wavelSourceB.A Wavelength (mu)
+}
+command wavelSourceC tcsApply Source C wavelength
+{
+   wavel tcs:wavelSourceC.A Wavelength (mu)
+}
+
+command wavelG1 tcsApply G1 wavelength
+{
+   wavel tcs:wavelG1.A Wavelength (mu)
+}
+
+command wavelG2 tcsApply G2 wavelength
+{
+   wavel tcs:wavelG2.A Wavelength (mu)
+}
+
+command wavelG3 tcsApply G3 wavelength
+{
+   wavel tcs:wavelG3.A Wavelength (mu)
+}
+
+command wavelG4 tcsApply G4 wavelength
+{
+   wavel tcs:wavelG4.A Wavelength (mu)
+}
+
+# TCS state records
+   status tcsstate
+    {
+      inPosition       tcs:sad:inPosition       0 TCS in position
+      agInPosition     tcs:agInPosCalc          0 A&G in position
+      instrAA          tcs:sad:instrAA          0 Instrument alignment angle
+      xoffsetPoA1      tcs:offsetPoA1.VALA      0 X offset
+      yoffsetPoA1      tcs:offsetPoA1.VALB      0 Y offset
+      m2GuideState     tcs:om:m2GuideState      0 M2 guiding state
+      absorbTipTilt    tcs:absorbTipTiltFlag    0 Absorb Tip/Tilt
+      comaCorrect      tcs:comaCorrect          0 Apply Coma Corrections
+      m1Guide          tcs:im:m1GuideOn         0 M1 guide
+      m2p1Guide        tcs:drives:p1GuideConfig 0 M2 P1 guide config
+      m2p2Guide        tcs:drives:p2GuideConfig 0 M2 P2 guide config
+      m2oiGuide        tcs:drives:oiGuideConfig 0 M2 OI guide config
+      m1GuideSource    tcs:m1GuideConfig.VALB   0 M1 guide source
+      port1Label       ag:port:port1            0 ISS port 1 label
+      port2Label       ag:port:port2            0 ISS port 2 label
+      port3Label       ag:port:port3            0 ISS port 3 label
+      port4Label       ag:port:port4            0 ISS port 4 label
+      port5Label       ag:port:port5            0 ISS port 5 label
+      sfName           ag:sfName                0 Science fold position
+      sfParked         ag:sfParked              0 Science parked
+      aoName           ag:aoName                0 AO fold position
+      p1FollowS        ag:p1:followS            0 P1 follow mode
+      p2FollowS        ag:p2:followS            0 P2 follow mode
+      oiFollowS        ag:oi:followS            0 OI follow mode
+      p1Parked         ag:p1:probeParked        0 P1 probe parked
+      p2Parked         ag:p2:probeParked        0 P2 probe parked
+      oiParked         ag:oi:probeParked        0 OI probe parked
+      pwfs1On          tcs:drives:p1Integrating 0 P1 integrating
+      pwfs2On          tcs:drives:p2Integrating 0 P2 integrating
+      oiwfsOn          tcs:drives:oiIntegrating 0 OI integrating
+      nodState         tcs:drives:nodState      0 Nod State
+      chopState        tcs:sad:chopState        0 Chop State
+      chopThrow        tcs:sad:chopThrow        0 Chop Throw
+      chopAngle        tcs:sad:chopPA           0 Chop PA
+      chopFreq         tcs:sad:chopFreq         0 Chop Frequency
+      chopDutyCycle    tcs:sad:chopDutyCycle    0 Chop Duty Cycle
+      chopon           m2:chopControl.VALA      0 SCS Chop on flag
+      decson           m2:chopControl.VALB      0 SCS DECS on flag
+      ngs1Follow  tcs:ngsPr1FollowStat.VAL   0  Canopus 1 in follow mode
+      ngs2Follow  tcs:ngsPr2FollowStat.VAL   0  Canopus 2 in follow mode
+      ngs3Follow  tcs:ngsPr3FollowStat.VAL   0  Canopus 3 in follow mode
+      odgw1Follow tcs:odgw1FollowStat.VAL    0  ODGW 1 in follow mode
+      odgw2Follow tcs:odgw2FollowStat.VAL    0  ODGW 2 in follow mode
+      odgw3Follow tcs:odgw3FollowStat.VAL    0  ODGW 3 in follow mode
+      odgw4Follow tcs:odgw4FollowStat.VAL    0  ODGW 4 in follow mode
+            
+      ngs1Parked     tcs:drives:ngsPr1Parked.VAL   0 Canopus 1 probe parked
+      ngs2Parked     tcs:drives:ngsPr2Parked.VAL   0 Canopus 2 probe parked
+      ngs3Parked     tcs:drives:ngsPr3Parked.VAL   0 Canopus 3 probe parked
+      odgw1Parked    tcs:drives:odgw1Parked.VAL    0 ODGW 1 parked
+      odgw2Parked    tcs:drives:odgw2Parked.VAL    0 ODGW 2 parked
+      odgw3Parked    tcs:drives:odgw3Parked.VAL    0 ODGW 3 parked
+      odgw4Parked    tcs:drives:odgw4Parked.VAL    0 ODGW 4 parked
+
+      agHwParked       ag:hwParked		0 AcqCam parked      
+      agHwName         tcs:drives:agHwName      0 AcqCam pickoff
+      
+      sourceAObjectName tcs:sad:sourceAObjectName 0 Object name
+      sourceAWavelength tcs:sad:sourceAWavelength 0 Source A Wavelength
+      
+# ALTAIR specific stuff...
+#
+# Note that the ALTAIR X/Y has X & Y swapped with respect to the TCS X/Y.
+#
+      cmprepx          tcs:aoPrepareCm.VALB     0 Prepared control matrix X
+      cmprepy          tcs:aoPrepareCm.VALA     0 Prepared control matrix Y
+      aogsx            tcs:drives:driveAOS.VALC 0 Guide star X
+      aogsy            tcs:drives:driveAOS.VALB 0 Guide star Y
+      conmatx          ao:conMatY               0 Control matrix star X
+      conmaty          ao:conMatX               0 Control matrix star Y
+      aoFollowS        ao:followS               0 AO follow mode
+      aowfsOn          ao:wfcs:loopRunning      0 AO loop on
+      aoSettled        ao:wfcs:settled          0 AO loop settled
+      m2aoGuide        tcs:drives:aoGuideConfig 0 M2 AO guide config
+      cmprepBusy       ao:prepareCm.BUSY        0 PrepareCm busy
+      rotTrackFrame    tcs:sad:rotTrackFrame    0 Cass Rotator tracking frame
+      lgsp1On          ao:lgsttSource.VALA      0 LgsP1 mode
+      lgsoiOn          ao:lgsttSource.VALB      0 LgsOI mode
+      p1nodachopa       tcs:configPwfs1.VALA    0 P1 nodachopa
+      p1nodachopb       tcs:configPwfs1.VALB    0 P1 nodachopb  
+      p1nodbchopa       tcs:configPwfs1.VALD    0 P1 nodbchopa  
+      p1nodbchopb       tcs:configPwfs1.VALE    0 P1 nodbchopb  
+      p2nodachopa       tcs:configPwfs2.VALA    0 P2 nodachopa  
+      p2nodachopb       tcs:configPwfs2.VALB    0 P2 nodachopb  
+      p2nodbchopa       tcs:configPwfs2.VALD    0 P2 nodbchopa  
+      p2nodbchopb       tcs:configPwfs2.VALE    0 P2 nodbchopb  
+      oinodachopa       tcs:configOiwfs.VALA    0 OI nodachopa  
+      oinodachopb       tcs:configOiwfs.VALB    0 OI nodachopb  
+      oinodbchopa       tcs:configOiwfs.VALD    0 OI nodbchopa  
+      oinodbchopb       tcs:configOiwfs.VALE    0 OI nodbchopb
+
+# fixme - taken from oi directly to figure blending
+      oiguideoutput     oiwfs:dc:outGuide       0 OI guide signal output
+
+# GeMS stuff      
+      #Virtual guiders mapping
+      g1MapName			tcs:guiderConfig.VALA	0	Name of GeMS WFS for G1
+      g2MapName			tcs:guiderConfig.VALB	0	Name of GeMS WFS for G2
+      g3MapName			tcs:guiderConfig.VALC	0	Name of GeMS WFS for G3
+      g4MapName			tcs:guiderConfig.VALD	0	Name of GeMS WFS for G4
+      #Virtual guiders wavelengths
+	   g1Wavelength		tcs:sad:g1Wavelength		0	G1 Wavelength
+	   g2Wavelength		tcs:sad:g2Wavelength		0	G2 Wavelength
+	   g3Wavelength		tcs:sad:g3Wavelength		0	G3 Wavelength
+	   g4Wavelength		tcs:sad:g4Wavelength		0	G4 Wavelength
+
+	   m2GuideCmdIn		tcs:m2GuideControl.A		0	M2 Guide control input
+
+      g1nodachopa tcs:configG1.VALA    0  G1 Nod A Chop A
+      g1nodachopb tcs:configG1.VALB    0  G1 Nod A Chop B
+      g1nodachopc tcs:configG1.VALC    0  G1 Nod A Chop C
+      g1nodbchopa tcs:configG1.VALD    0  G1 Nod B Chop A
+      g1nodbchopb tcs:configG1.VALE    0  G1 Nod B Chop B
+      g1nodbchopc tcs:configG1.VALF    0  G1 Nod B Chop C
+      g1nodcchopa tcs:configG1.VALG    0  G1 Nod C Chop A
+      g1nodcchopb tcs:configG1.VALH    0  G1 Nod C Chop B
+      g1nodcchopc tcs:configG1.VALI    0  G1 Nod C Chop C
+      g2nodachopa tcs:configG2.VALA    0  G2 Nod A Chop A
+      g2nodachopb tcs:configG2.VALB    0  G2 Nod A Chop B
+      g2nodachopc tcs:configG2.VALC    0  G2 Nod A Chop C
+      g2nodbchopa tcs:configG2.VALD    0  G2 Nod B Chop A
+      g2nodbchopb tcs:configG2.VALE    0  G2 Nod B Chop B
+      g2nodbchopc tcs:configG2.VALF    0  G2 Nod B Chop C
+      g2nodcchopa tcs:configG2.VALG    0  G2 Nod C Chop A
+      g2nodcchopb tcs:configG2.VALH    0  G2 Nod C Chop B
+      g2nodcchopc tcs:configG2.VALI    0  G2 Nod C Chop C
+      g3nodachopa tcs:configG3.VALA    0  G3 Nod A Chop A
+      g3nodachopb tcs:configG3.VALB    0  G3 Nod A Chop B
+      g3nodachopc tcs:configG3.VALC    0  G3 Nod A Chop C
+      g3nodbchopa tcs:configG3.VALD    0  G3 Nod B Chop A
+      g3nodbchopb tcs:configG3.VALE    0  G3 Nod B Chop B
+      g3nodbchopc tcs:configG3.VALF    0  G3 Nod B Chop C
+      g3nodcchopa tcs:configG3.VALG    0  G3 Nod C Chop A
+      g3nodcchopb tcs:configG3.VALH    0  G3 Nod C Chop B
+      g3nodcchopc tcs:configG3.VALI    0  G3 Nod C Chop C
+      g4nodachopa tcs:configG4.VALA    0  G4 Nod A Chop A
+      g4nodachopb tcs:configG4.VALB    0  G4 Nod A Chop B
+      g4nodachopc tcs:configG4.VALC    0  G4 Nod A Chop C
+      g4nodbchopa tcs:configG4.VALD    0  G4 Nod B Chop A
+      g4nodbchopb tcs:configG4.VALE    0  G4 Nod B Chop B
+      g4nodbchopc tcs:configG4.VALF    0  G4 Nod B Chop C
+      g4nodcchopa tcs:configG4.VALG    0  G4 Nod C Chop A
+      g4nodcchopb tcs:configG4.VALH    0  G4 Nod C Chop B
+      g4nodcchopc tcs:configG4.VALI    0  G4 Nod C Chop C
+   }
+
+# DhsHdr (common headers)
+#include <dhshdr.ca>
+
+# GCAL
+#include <gcal.ca>
+
+# GPOL
+#include <gpol.ca>
+
+# Instruments control & specific headers
+
+#include <niri.ca>
+#include <nirihdr.ca>
+
+#include <gmos.ca>
+#include <gmoshdr.ca>
+
+#include <michelle.ca>
+#include <michellehdr.ca>
+
+#include <acqcam.ca>
+#include <acqcamhdr.ca>
+
+#include <trecs.ca>
+#include <trecshdr.ca>
+
+#include <gnirs.ca>
+#include <gnirshdr.ca>
+
+#include <bHROS.ca>
+#include <bHROShdr.ca>
+
+#include <nifs.ca>
+#include <nifshdr.ca>
+
+#include <nici.ca>
+#include <niciao.ca>
+#include <nicihdr.ca>
+
+#include <gsaoi.ca>
+#include <gsaoihdr.ca>
+
+#include <flamingos2.ca>
+#include <flamingos2hdr.ca>
+# #include <flamingos2sim.ca>
+# #include <flamingos2hdrsim.ca>
+
+#include <gpi.ca>
+#include <gpihdr.ca>
+
+#include <gems.ca>
